@@ -1,13 +1,7 @@
 #!/usr/bin/python3
-square_matrix_map = \
-    __import__('101-square_matrix_map').square_matrix_map
+weight_average = __import__('100-weight_average').weight_average
 
-matrix = [
-    [1, 2, 3],
-    [4, 5, 6],
-    [7, 8, 9]
-]
-
-new_matrix = square_matrix_map(matrix)
-print(new_matrix)
-print(matrix)
+my_list = [(1, 2), (2, 1), (3, 10), (4, 2)]
+# = ((1 * 2) + (2 * 1) + (3 * 10) + (4 * 2)) / (2 + 1 + 10 + 2)
+result = weight_average(my_list)
+print("Average: {:0.2f}".format(result))
