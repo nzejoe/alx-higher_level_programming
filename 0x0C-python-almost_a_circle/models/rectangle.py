@@ -138,7 +138,7 @@ class Rectangle(Base):
             self.__class__.__name__, self.id, self.__x, self.__y,
             self.__width, self.__height))
         
-	 # *Args
+	 # update
     def update(self, *args, **kwargs):
         """Assign arguments to attributes in the order:
         args1: id, args2: width, args3: height, args4: x, args5: y
