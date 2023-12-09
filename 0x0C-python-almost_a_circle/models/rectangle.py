@@ -138,11 +138,11 @@ class Rectangle(Base):
             self.__class__.__name__, self.id, self.__x, self.__y,
             self.__width, self.__height))
         
-	 # update
-    def update(self, *args):
+	 # *Args
+    def update(self, *args, **kwargs):
         """Assign arguments to attributes in the order:
         args1: id, args2: width, args3: height, args4: x, args5: y
-       """
+        or kwargs if args not given."""
         if args:
             if len(args) >= 1:
                 self.id = args[0]
@@ -154,3 +154,9 @@ class Rectangle(Base):
                 self.x = args[3]
             if len(args) >= 5:
                 self.y = args[4]
+        else:
+            keys = ['id', 'width', 'height', 'x', 'y']
+            if kwargs is not None:
+                for key, value in kwargs.items():
+                    if key in keys:
+                        setattr(self, key, value)
