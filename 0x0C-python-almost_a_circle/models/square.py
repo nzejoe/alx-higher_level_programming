@@ -22,6 +22,11 @@ class Square(Rectangle):
     Inherited methods of:
         Base.init(self, id=None);
         Rectangle.init(self, width, height, x=0, y=0, id=None);
+        update(self, *args, **kwargs); width(self), width(self, value);
+        height(self), height(self, value); x(self), x(self, value);
+        y(self), y(self, value); area(self); display(self);
+    Class Attribute:
+        size
     """
     def __init__(self, size, x=0, y=0, id=None):
         """
@@ -34,3 +39,26 @@ class Square(Rectangle):
         """
         # call superclass constructor with all parameters
         super().__init__(size, size, x, y, id)
+        self.size = size
+	
+    def __str__(self):
+        """
+		Print out string representation of the Square instance.
+		Returns:
+			str: A string in the format [Square] (<id>) <x>/<y> - <size>
+		"""
+        return ("[Square] ({}) {}/{} - {}".format(
+			self.id, self.x, self.y, self.width))
+
+    @property
+    def size(self):
+        """Getter for Size.
+        Return: size."""
+        return self.width
+
+    @size.setter
+    def size(self, value):
+        """Setter for size. Same validations as width/height from superclass.
+        Raise exceptions where value is not an int or < 0."""
+        self.width = value
+        self.height = value
