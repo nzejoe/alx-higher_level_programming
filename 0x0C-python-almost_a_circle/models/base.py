@@ -105,3 +105,24 @@ class Base:
         # Use the update method to apply attributes from the dictionary
         inert.update(**dictionary)
         return inert
+
+    @classmethod
+    def load_from_file(cls):
+        """Load a list of instances from a JSON file.
+        Returns:
+            list: A list of instances.
+        """
+        filename = '{}.json'.format(cls.__name__)
+        instance_list = []
+
+        try:
+            with open(filename, 'r') as file:
+                json_data = file.read()
+                data_list = cls.from_json_string(json_data)
+                for data in data_list:
+                    instance = cls.create(**data)
+                    instance_list.append(instance)
+        except FileNotFoundError:
+            pass
+
+        return instance_list
