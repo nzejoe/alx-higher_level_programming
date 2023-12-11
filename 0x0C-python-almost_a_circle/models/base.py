@@ -30,6 +30,7 @@ that opens a window and draws all the Rectangles and Squares:
 
 import json
 
+
 class Base:
     """
     Base class to manage id attribute in all future classes
@@ -53,3 +54,19 @@ class Base:
         if list_dictionaries is None or not list_dictionaries:
             return "[]"
         return json.dumps(list_dictionaries)
+
+    @classmethod
+    def save_to_file(cls, list_objs):
+        """Write JSON string representation into a file.
+        Args:
+            cls (class): The class (e.g., Rectagle, Square, etc).
+            list_objs (list of instances): instances that inherits from Base.
+        """
+        json_list = []
+        if list_objs is not None:
+            for obj in list_objs:
+                json_list.append(cls.to_dictionary(obj))
+
+        filename = '{}.json'.format(cls.__name__)
+        with open(filename, 'w') as my_file:
+            my_file.write(cls.to_json_string(json_list))
