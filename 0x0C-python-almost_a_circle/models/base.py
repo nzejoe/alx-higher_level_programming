@@ -28,6 +28,8 @@ Add the static method def draw(list_rectangles, list_squares):
 that opens a window and draws all the Rectangles and Squares:
 """
 
+import json
+
 class Base:
     """
     Base class to manage id attribute in all future classes
@@ -43,3 +45,11 @@ class Base:
             # increment __nb_objects & assign the new value to the id attribute
             Base.__nb_objects += 1
             self.id = Base.__nb_objects
+
+    @staticmethod
+    def to_json_string(list_dictionaries):
+        """Method to return JSON string representation - list of dictionaries.
+        """
+        if list_dictionaries is None or not list_dictionaries:
+            return "[]"
+        return json.dumps(list_dictionaries)
