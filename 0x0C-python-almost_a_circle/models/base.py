@@ -28,7 +28,9 @@ Add the static method def draw(list_rectangles, list_squares):
 that opens a window and draws all the Rectangles and Squares:
 """
 
+import turtle
 import json
+import csv
 
 
 class Base:
@@ -82,3 +84,24 @@ class Base:
         if json_string is None or len(json_string) == 0:
             return []
         return json.loads(json_string)
+
+    @classmethod
+    def create(cls, **dictionary):
+        """
+        Create an instance with attributes set using the provided dictionary.
+        Args:
+            cls (class): The class (e.g., Rectangle or Square).
+            **dictionary: A dictionary containing attribute-value pairs.
+        Returns:
+            Base: An instance of the class with attributes set
+            based on the dictionary.
+        """
+        if cls.__name__ == 'Rectangle':
+            inert = cls(1, 1)  # Create a dummy Rectangle instance
+        elif cls.__name__ == 'Square':
+            inert = cls(1)  # Create a dummy Square instance
+        else:
+            raise ValueError("Unsupported class")
+        # Use the update method to apply attributes from the dictionary
+        inert.update(**dictionary)
+        return inert
