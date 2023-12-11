@@ -28,7 +28,6 @@ Add the static method def draw(list_rectangles, list_squares):
 that opens a window and draws all the Rectangles and Squares:
 """
 
-import turtle
 import json
 import csv
 
@@ -126,3 +125,19 @@ class Base:
             pass
 
         return instance_list
+
+    @classmethod
+    def save_to_file_csv(cls, list_objs):
+        """Serialize list of instances to a CSV file.
+        Args:
+            cls (class): the class (Rectangle, Square, etc)
+            list_objs (list of instances) : list of instances to be serialized.
+        """
+        filename = '{}.csv'.format(cls.__name__)
+        with open(filename, 'w', newline='') as my_file:
+            writer = csv.writer(my_file)
+            for x in list_objs:
+                if cls.__name__ == "Rectangle":
+                    writer.writerow([x.id, x.width, x.height, x.x, x.y])
+                if cls.__name__ == "Square":
+                    writer.writerow([x.id, x.size, x.x, x.y])
