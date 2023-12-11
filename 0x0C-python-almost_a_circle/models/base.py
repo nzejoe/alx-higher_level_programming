@@ -28,6 +28,7 @@ Add the static method def draw(list_rectangles, list_squares):
 that opens a window and draws all the Rectangles and Squares:
 """
 
+import turtle
 import json
 import csv
 
@@ -141,3 +142,30 @@ class Base:
                     writer.writerow([x.id, x.width, x.height, x.x, x.y])
                 if cls.__name__ == "Square":
                     writer.writerow([x.id, x.size, x.x, x.y])
+
+    @classmethod
+    def load_from_file_csv(cls):
+        """Deserialize instances from a CSV file.
+        Returns:
+            list: list of instances.
+        """
+        instance_list = []
+        filename = '{}.csv'.format(cls.__name__)
+
+        with open(filename, 'r', newline='') as f:
+            reader = csv.reader(f)
+            for row in reader:
+                if cls.__name__ == "Rectangle":
+                    data = {"id": int(row[0]),
+                            "width": int(row[1]),
+                            "height": int(row[2]),
+                            "x": int(row[3]),
+                            "y": int(row[4])}
+                if cls.__name__ == "Square":
+                    data = {"id": int(row[0]),
+                            "size": int(row[1]),
+                            "x": int(row[2]),
+                            "y": int(row[3])}
+                instance = cls.create(**data)
+                instance_list.append(instance)
+        return instance_list
