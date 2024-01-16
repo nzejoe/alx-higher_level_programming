@@ -41,7 +41,7 @@ class Rectangle(Base):
         self.x = x
         self.y = y
 
-    # Set private getters and setters for each attribute
+    # Set public getters and setters for each attribute
     # Width
     @property
     def width(self):
@@ -113,23 +113,23 @@ class Rectangle(Base):
             raise ValueError("y must be >= 0")
         # update private instance attribute
         self.__y = value
-        
-	 # Public Method:
+
+    # Public Methods:
     # Area
     def area(self):
         """Calculate and returns the area of the Rectangle instance.
         """
         return (self.__width * self.__height)
-    
-     # Display
+
+    # Display
     def display(self):
         """Function that display(print) to stdout
         the Rectangle instance with the `#` character."""
         [print() for j in range(self.__y)]
         for i in range(self.__height):
             print(" " * self.__x + "#" * self.__width)
-	
-	# __str__ (custom)
+
+    # custom __str__
     def __str__(self):
         """Return string representation of Rectangle class instance.
         Format: [Rectangle] (<id>) <x>/<y> - <width>/<height>
@@ -137,8 +137,8 @@ class Rectangle(Base):
         return ("[{:s}] ({}) {}/{} - {}/{}".format(
             self.__class__.__name__, self.id, self.__x, self.__y,
             self.__width, self.__height))
-        
-	 # update
+
+    # update
     def update(self, *args, **kwargs):
         """Assign arguments to attributes in the order:
         args1: id, args2: width, args3: height, args4: x, args5: y
@@ -160,3 +160,16 @@ class Rectangle(Base):
                 for key, value in kwargs.items():
                     if key in keys:
                         setattr(self, key, value)
+
+    def to_dictionary(self):
+        """Function to return dictionary representation of Rectangle instance.
+        Returns:
+            dict: Dictionary containing id, width, height, x, and y.
+        """
+        return {
+            'id': self.id,
+            'width': self.width,
+            'height': self.height,
+            'x': self.x,
+            'y': self.y
+        }
