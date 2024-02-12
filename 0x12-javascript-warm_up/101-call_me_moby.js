@@ -1,5 +1,7 @@
 #!/usr/bin/node
 
-exports.addMeMaybe = function (number, theFunction) {
-  theFunction(number + 1);
+exports.callMeMoby = function (x, theFunction) {
+  for (let y = 0; y < x; y++) {
+    theFunction();
+  }
 };
